@@ -92,9 +92,15 @@
 (def ^:private extend-column (extend-with make-row cell-count cells
                                           make-empty-row))
 
+(defn- mix [sources]
+  (case (count sources)
+    0 []
+    1 (first sources)
+    (apply interleave sources)))
+
 (defn- transpose [n things]
   (->> things
-       (apply interleave)
+       mix
        (partition n)))
 
 (def max-cell-string-length (max-counter lines count))
@@ -129,9 +135,11 @@
        (map (partial make-cell-with-width width))))
 
 (defn widths+columns->str [widths columns]
-  {:pre [(= (count widths) (count columns))
+  {:pre [(seq widths)
          (every? integer? widths)
-         (every? (partial every? string?) columns)]}
+         (seq columns)
+         (every? (partial every? string?) columns)
+         (= (count widths) (count columns))]}
   (->> [widths (->> columns
                     (map (partial map (comp make-cell vector)))
                     (map make-row)
@@ -149,6 +157,9 @@
        (max-count)))
 
 (defn- column-widths [total-width columns]
+  {:pre [(integer? total-width)
+         (seq columns)
+         (every? (partial every? string?) columns)]}
   (let [columns (butlast columns)
         widths (vec (map column-width columns))
         last-width (- total-width (apply + widths))]
