@@ -2,6 +2,8 @@
   (:require [clojure.string :as s])
   (:import [jline TerminalFactory]))
 
+(defn max-count [coll] (apply max (map count coll)))
+
 (defprotocol ICell
   (lines [this] "Return a sequential collection of lines.")
   (line-count [this] "Return the number of lines in a cell."))
@@ -55,7 +57,7 @@
            lines (transient [])]
       (if words
         (let [nword (first words)]
-          (if (<= (+ (count line) (count nword)) width)
+          (if (< (+ (count line) (count nword)) width)
             (recur (str line \space nword)
                    (next words)
                    lines)
@@ -74,7 +76,7 @@
          (map (partial pad width)))))
 
 (defn- max-counter [select count]
-  (fn max-count [coll]
+  (fn a-max-count [coll]
     (->> coll select (map count) (apply max))))
 
 (defn- extend-with [make count contents padder]
@@ -141,17 +143,14 @@
        (map row->str)
        (s/join "\n")))
 
-(defn max-count [coll] (apply max (map count coll)))
-
 (defn column-width [column]
   (->> column
-       (spy)
        (mapcat #(s/split % #"\n"))
        (max-count)))
 
 (defn- column-widths [total-width columns]
   (let [columns (butlast columns)
-        widths (vec (map maxthing columns))
+        widths (vec (map column-width columns))
         last-width (- total-width (apply + widths))]
     (assert (>= last-width 0)
             (str "total width of columns is more than given "
@@ -166,11 +165,9 @@
 (defn table-of [width things & selectors]
   (columns->str
     width
-    (map selectors
-         (fn apply-selector [selector]
-           (cond (fn? selector) (map selector things)
-                 (sequential? selector) (map str selector)
-                 :else [(str selector)])))))
+    (for [selector selectors]
+      (cond (string? selector) (repeat (count things) (str selector))
+            :else (map selector things)))))
 
 (defn terminal-table [& more] (apply table (get-terminal-width) more))
 (defn terminal-table-of [& more] (apply table-of (get-terminal-width) more))
