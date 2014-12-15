@@ -34,7 +34,7 @@ Add to dependencies:
 
 ```clojure
 (require '[chic-text.terminal :as term])
-;; My terminals current width is 72 columns
+;; My terminal's current width is 72 columns
 (term/print-table-of things "  " :name " - " :desc) ; prints ↓
 ```
 
