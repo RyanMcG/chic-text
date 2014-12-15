@@ -1,4 +1,4 @@
-(defproject chic-text "0.1.0"
+(defproject chic-text/chic-text "0.1.0"
   :description "Helpful functions for formatting text into tables."
   :url "https://github.com/RyanMcG/chic-text"
   :license {:name "Eclipse Public License"
