@@ -178,7 +178,6 @@
   {:pre [(integer? total-width)
          (sequential? columns)
          (every? sequential? columns)]}
-
   (if (empty? columns)
     []
     (let [columns (butlast columns)
