@@ -1,0 +1,5 @@
+{:name "chic-text"
+ :output-dir "api"
+ :src-uri "https://github.com/RyanMcG/chic-text"
+ :src-dir-uri "https://github.com/RyanMcG/chic-text/blob/master/"
+ :src-linenum-anchor-prefix "L"}

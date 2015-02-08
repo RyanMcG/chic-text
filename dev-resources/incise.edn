@@ -1,0 +1,9 @@
+{:site-title "chic-text"
+ :author "Ryan McGowan"
+ :parse-defaults {:transformers [:html-header-anchors :vm-layout]}
+ :stefon {:asset-roots ["dev-resources/assets"]
+          :manifest-file "dev-resources/manifest.json"
+          :precompiles ["vm/javascripts/vm.js.stefon"
+                        "vm/stylesheets/vm.css.stefon"]}
+ :uri-root "chic-text"
+ :deploy {:workflow :git-branch}}
