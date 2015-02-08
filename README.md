@@ -8,6 +8,8 @@ Add to dependencies:
 ```clojure
 [chic-text "0.1.0"]
 ```
+###### [**Source**][source]
+###### [**API Documentation**][api]
 
 ## Example usages
 
@@ -48,9 +50,14 @@ Add to dependencies:
         companion.
 ```
 
+Note the word wrapping.
+
 ## License
 
 Copyright © 2014 Ryan V McGowan
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.
+
+[source]: https://github.com/RyanMcG/chic-text
+[api]: http://www.ryanmcg.com/chic-text/api/
