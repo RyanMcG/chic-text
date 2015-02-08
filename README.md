@@ -1,4 +1,4 @@
-# chic-text
+# chic-text [![Build Status](https://travis-ci.org/RyanMcG/chic-text.svg?branch=master)](https://travis-ci.org/RyanMcG/chic-text)
 
 Helpful functions for formatting text into tables.
 This should be useful for command line applications.
