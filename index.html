@@ -30,7 +30,34 @@
         known as man's best friend. The dog was the first domesticated
         animal and has been widely kept as a working, hunting, and pet
         companion.
-</code></pre><p>Note the word wrapping.</p><h2><a class="incise-generated-tag" name="license" href="#license"></a>License</h2><p>Copyright © 2014 Ryan V McGowan</p><p>Distributed under the Eclipse Public License either version 1.0 or (at your option) any later version.</p></article></div><footer><div class="content"><p id="credit">This website was <a href="https://github.com/RyanMcG/incise">incised</a>.</p></div><script type="text/javascript">//<![CDATA[
+</code></pre><p>Note the word wrapping.</p><h2><a class="incise-generated-tag" name="clojure.tools.cli-integration" href="#clojure.tools.cli-integration"></a><a href="https://github.com/clojure/tools.cli"><code>clojure.tools.cli</code></a> integration</h2><p>The namespace <a href="https://github.com/RyanMcG/chic-text/blob/master/src/chic_text/tools/cli.clj"><code>chic-text.tools.cli</code></a> defines functions for interacting with <a href="https://github.com/clojure/tools.cli"><code>clojure.tools.cli</code></a>.</p><h3><a class="incise-generated-tag" name="summary" href="#summary"></a><code>summary</code></h3><p>Can be used with <code>parse-opts</code> from <code>clojure.tools.cli</code>.</p>
+<pre><code class="clojure">(require '[clojure.tools.cli :refer [parse-opts]])
+(require '[chic-text.tools.cli :refer [summary]])
+
+(def opts [["-h" "--help" "Print this help."]
+           ["-t" "--thread-count THREAD_COUNT"
+            "The number of threads for the development server to use."
+            :default 4]
+           [nil "--stuff" "More stuff. Lots of stuff."
+            :default {:stuff 1}
+            :default-desc "stuff"]
+           ["-i" "--in-dir INPUT_DIRECTORY"
+            "The directory to get source from"]])
+
+(-&gt; (parse-opts [] opts :summary-fn summary)
+    :summary
+    println)
+</code></pre><p>Prints something like:</p>
+<pre><code>  -h, --help                      – Print this help.
+  -t, --thread-count THREAD_COUNT – The number of threads
+                                    for the development
+                                    server to use. [default:
+                                    4]
+  --stuff                         – More stuff. Lots of
+                                    stuff. [default: stuff]
+  -i, --in-dir INPUT_DIRECTORY    – The directory to get
+                                    source from
+</code></pre><h2><a class="incise-generated-tag" name="license" href="#license"></a>License</h2><p>Copyright © 2014 Ryan V McGowan</p><p>Distributed under the Eclipse Public License either version 1.0 or (at your option) any later version.</p></article></div><footer><div class="content"><p id="credit">This website was <a href="https://github.com/RyanMcG/incise">incised</a>.</p></div><script type="text/javascript">//<![CDATA[
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
   ga('create', 'UA-47124253-1', 'ryanmcg.com');
