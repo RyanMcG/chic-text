@@ -6,7 +6,7 @@ This should be useful for command line applications.
 Add to dependencies:
 
 ```clojure
-[chic-text "0.1.0"]
+[chic-text "0.2.0"]
 ```
 ###### [**Source**][source]
 ###### [**API Documentation**][api]
