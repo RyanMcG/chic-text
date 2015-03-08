@@ -52,6 +52,47 @@ Add to dependencies:
 
 Note the word wrapping.
 
+## [`clojure.tools.cli`][tools.cli] integration
+
+The namespace [`chic-text.tools.cli`][cli] defines functions for interacting with [`clojure.tools.cli`][tools.cli].
+
+### `summary`
+
+Can be used with `parse-opts` from `clojure.tools.cli`.
+
+```clojure
+(require '[clojure.tools.cli :refer [parse-opts]])
+(require '[chic-text.tools.cli :refer [summary]])
+
+(def opts [["-h" "--help" "Print this help."]
+           ["-t" "--thread-count THREAD_COUNT"
+            "The number of threads for the development server to use."
+            :default 4]
+           [nil "--stuff" "More stuff. Lots of stuff."
+            :default {:stuff 1}
+            :default-desc "stuff"]
+           ["-i" "--in-dir INPUT_DIRECTORY"
+            "The directory to get source from"]])
+
+(-> (parse-opts [] opts :summary-fn summary)
+    :summary
+    println)
+```
+
+Prints something like:
+
+```
+  -h, --help                      – Print this help.
+  -t, --thread-count THREAD_COUNT – The number of threads
+                                    for the development
+                                    server to use. [default:
+                                    4]
+  --stuff                         – More stuff. Lots of
+                                    stuff. [default: stuff]
+  -i, --in-dir INPUT_DIRECTORY    – The directory to get
+                                    source from
+```
+
 ## License
 
 Copyright © 2014 Ryan V McGowan
@@ -61,3 +102,5 @@ your option) any later version.
 
 [source]: https://github.com/RyanMcG/chic-text
 [api]: http://www.ryanmcg.com/chic-text/api/
+[tools.cli]: https://github.com/clojure/tools.cli
+[cli]: https://github.com/RyanMcG/chic-text/blob/master/src/chic_text/tools/cli.clj
